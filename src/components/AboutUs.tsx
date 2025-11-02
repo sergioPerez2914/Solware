@@ -50,9 +50,16 @@ const AboutUs = () => {
 	return (
 		<section
 			id="quienes-somos"
-			className="pt-20 pb-0 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-dark text-justify"
+			className="relative pt-20 pb-0 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 text-justify overflow-hidden transition-colors duration-300"
 		>
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			{/* Partículas de fondo sutiles */}
+			<div className="absolute inset-0 overflow-hidden pointer-events-none">
+				<div className="absolute w-40 h-40 bg-blue-400/10 rounded-full blur-3xl animate-float-slow top-20 left-10"></div>
+				<div className="absolute w-56 h-56 bg-purple-400/10 rounded-full blur-3xl animate-float-medium top-40 right-20"></div>
+				<div className="absolute w-32 h-32 bg-pink-400/15 rounded-full blur-2xl animate-float-fast bottom-40 left-1/4"></div>
+			</div>
+
+			<div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="text-center mb-16">
 					<BlurText
 						text={t('about.title')}
@@ -76,38 +83,38 @@ const AboutUs = () => {
 						<h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">{t('about.story.title')}</h3>
 						
 						{/* Comic-style timeline */}
-						<div className="relative">
-							{/* Timeline line without pulse animation */}
-							<div className="absolute left-5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-pink-600 via-purple-500 to-blue-500"></div>
+						<div className="relative mt-8">
+							{/* Timeline line con efecto glow */}
+							<div className="absolute left-5 top-0 bottom-0 w-1 bg-gradient-to-b from-pink-600 via-purple-500 to-blue-500 rounded-full shadow-lg shadow-purple-500/50"></div>
 							
 							{/* Story panels */}
 							<div className="space-y-8">
 								{/* Panel 1 */}
 								<div className="relative pl-16">
 									<div 
-										className="absolute left-0 w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center shadow-lg" 
+										className="absolute left-0 w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-700 rounded-full flex items-center justify-center shadow-xl shadow-pink-500/50 border-2 border-white dark:border-gray-800" 
 										style={{ 
 											top: '-5px'
 										}}>
-										<Lightbulb className="w-5 h-5 text-white" />
+										<Lightbulb className="w-6 h-6 text-white" />
 									</div>
 									<div 
-										className={`group bg-pink-100 dark:bg-pink-900/30 rounded-lg p-5 border-l-4 border-pink-600 shadow-md cursor-pointer
-											transition-all duration-300 
-											hover:bg-pink-200 dark:hover:bg-pink-800/50 
-											hover:-translate-y-2 hover:shadow-xl hover:scale-105 
-											hover:shadow-pink-400/40 dark:hover:shadow-pink-400/40
-											hover:border-pink-500 ${
+										className={`group bg-white/90 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-6 border-2 border-pink-200 dark:border-pink-600/30 shadow-lg cursor-pointer
+											transition-all duration-500 
+											hover:bg-pink-50 dark:hover:bg-pink-900/40 
+											hover:-translate-y-2 hover:shadow-2xl hover:scale-[1.02]
+											hover:shadow-pink-400/40 dark:hover:shadow-pink-400/50
+											hover:border-pink-400 dark:hover:border-pink-500 ${
 												isManualHover ? 
-													(manualHoverIndex === 0 ? 'bg-pink-200 dark:bg-pink-800/50 -translate-y-2 shadow-xl scale-105 shadow-pink-400/40 dark:shadow-pink-400/40 border-pink-500' : '') :
-													(autoHoverIndex === 0 ? 'bg-pink-200 dark:bg-pink-800/50 -translate-y-2 shadow-xl scale-105 shadow-pink-400/40 dark:shadow-pink-400/40 border-pink-500' : '')
+													(manualHoverIndex === 0 ? 'bg-pink-50 dark:bg-pink-900/40 -translate-y-2 shadow-2xl scale-[1.02] shadow-pink-400/40 dark:shadow-pink-400/50 border-pink-400 dark:border-pink-500' : '') :
+													(autoHoverIndex === 0 ? 'bg-pink-50 dark:bg-pink-900/40 -translate-y-2 shadow-2xl scale-[1.02] shadow-pink-400/40 dark:shadow-pink-400/50 border-pink-400 dark:border-pink-500' : '')
 											}`}
 										style={{ marginTop: '10px' }}
 										onMouseEnter={() => handleMouseEnter(0)}
 										onMouseLeave={handleMouseLeave}
 									>
 										<p className="text-gray-700 dark:text-gray-300 text-sm md:text-base leading-relaxed
-											group-hover:text-gray-800 dark:group-hover:text-white
+											group-hover:text-gray-900 dark:group-hover:text-white
 											transition-all duration-300">{t('about.story.paragraph1')}</p>
 									</div>
 								</div>
@@ -115,29 +122,29 @@ const AboutUs = () => {
 								{/* Panel 2 */}
 								<div className="relative pl-16">
 									<div 
-										className="absolute left-0 w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center shadow-lg" 
+										className="absolute left-0 w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center shadow-xl shadow-purple-500/50 border-2 border-white dark:border-gray-800" 
 										style={{ 
 											top: '10px'
 										}}>
-										<Target className="w-5 h-5 text-white" />
+										<Target className="w-6 h-6 text-white" />
 									</div>
 									<div 
-										className={`group bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-lg p-5 border-l-4 border-purple-500 shadow-md cursor-pointer
-											transition-all duration-300 
-											hover:from-purple-100 hover:to-purple-200 dark:hover:from-purple-800/40 dark:hover:to-purple-700/40
-											hover:-translate-y-2 hover:shadow-xl hover:scale-105 
-											hover:shadow-purple-400/40 dark:hover:shadow-purple-400/40
-											hover:border-purple-400 ${
+										className={`group bg-white/90 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-6 border-2 border-purple-200 dark:border-purple-600/30 shadow-lg cursor-pointer
+											transition-all duration-500 
+											hover:bg-purple-50 dark:hover:bg-purple-900/40
+											hover:-translate-y-2 hover:shadow-2xl hover:scale-[1.02]
+											hover:shadow-purple-400/40 dark:hover:shadow-purple-400/50
+											hover:border-purple-400 dark:hover:border-purple-500 ${
 												isManualHover ? 
-													(manualHoverIndex === 1 ? 'from-purple-100 to-purple-200 dark:from-purple-800/40 dark:to-purple-700/40 -translate-y-2 shadow-xl scale-105 shadow-purple-400/40 dark:shadow-purple-400/40 border-purple-400' : '') :
-													(autoHoverIndex === 1 ? 'from-purple-100 to-purple-200 dark:from-purple-800/40 dark:to-purple-700/40 -translate-y-2 shadow-xl scale-105 shadow-purple-400/40 dark:shadow-purple-400/40 border-purple-400' : '')
+													(manualHoverIndex === 1 ? 'bg-purple-50 dark:bg-purple-900/40 -translate-y-2 shadow-2xl scale-[1.02] shadow-purple-400/40 dark:shadow-purple-400/50 border-purple-400 dark:border-purple-500' : '') :
+													(autoHoverIndex === 1 ? 'bg-purple-50 dark:bg-purple-900/40 -translate-y-2 shadow-2xl scale-[1.02] shadow-purple-400/40 dark:shadow-purple-400/50 border-purple-400 dark:border-purple-500' : '')
 											}`}
 										style={{ marginTop: '10px' }}
 										onMouseEnter={() => handleMouseEnter(1)}
 										onMouseLeave={handleMouseLeave}
 									>
 										<p className="text-gray-700 dark:text-gray-300 text-sm md:text-base leading-relaxed
-											group-hover:text-gray-800 dark:group-hover:text-white
+											group-hover:text-gray-900 dark:group-hover:text-white
 											transition-all duration-300">{t('about.story.paragraph2')}</p>
 									</div>
 								</div>
@@ -145,29 +152,29 @@ const AboutUs = () => {
 								{/* Panel 3 */}
 								<div className="relative pl-16">
 									<div 
-										className="absolute left-0 w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center shadow-lg" 
+										className="absolute left-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-xl shadow-blue-500/50 border-2 border-white dark:border-gray-800" 
 										style={{ 
 											top: '10px'
 										}}>
-										<Rocket className="w-5 h-5 text-white" />
+										<Rocket className="w-6 h-6 text-white" />
 									</div>
 									<div 
-										className={`group bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg p-5 border-l-4 border-blue-500 shadow-md cursor-pointer
-											transition-all duration-300 
-											hover:from-blue-100 hover:to-blue-200 dark:hover:from-blue-800/40 dark:hover:to-blue-700/40
-											hover:-translate-y-2 hover:shadow-xl hover:scale-105 
-											hover:shadow-blue-400/40 dark:hover:shadow-blue-400/40
-											hover:border-blue-400 ${
+										className={`group bg-white/90 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-6 border-2 border-blue-200 dark:border-blue-600/30 shadow-lg cursor-pointer
+											transition-all duration-500 
+											hover:bg-blue-50 dark:hover:bg-blue-900/40
+											hover:-translate-y-2 hover:shadow-2xl hover:scale-[1.02]
+											hover:shadow-blue-400/40 dark:hover:shadow-blue-400/50
+											hover:border-blue-400 dark:hover:border-blue-500 ${
 												isManualHover ? 
-													(manualHoverIndex === 2 ? 'from-blue-100 to-blue-200 dark:from-blue-800/40 dark:to-blue-700/40 -translate-y-2 shadow-xl scale-105 shadow-blue-400/40 dark:shadow-blue-400/40 border-blue-400' : '') :
-													(autoHoverIndex === 2 ? 'from-blue-100 to-blue-200 dark:from-blue-800/40 dark:to-blue-700/40 -translate-y-2 shadow-xl scale-105 shadow-blue-400/40 dark:shadow-blue-400/40 border-blue-400' : '')
+													(manualHoverIndex === 2 ? 'bg-blue-50 dark:bg-blue-900/40 -translate-y-2 shadow-2xl scale-[1.02] shadow-blue-400/40 dark:shadow-blue-400/50 border-blue-400 dark:border-blue-500' : '') :
+													(autoHoverIndex === 2 ? 'bg-blue-50 dark:bg-blue-900/40 -translate-y-2 shadow-2xl scale-[1.02] shadow-blue-400/40 dark:shadow-blue-400/50 border-blue-400 dark:border-blue-500' : '')
 											}`}
 										style={{ marginTop: '10px' }}
 										onMouseEnter={() => handleMouseEnter(2)}
 										onMouseLeave={handleMouseLeave}
 									>
 										<p className="text-gray-700 dark:text-gray-300 text-sm md:text-base leading-relaxed
-											group-hover:text-gray-800 dark:group-hover:text-white
+											group-hover:text-gray-900 dark:group-hover:text-white
 											transition-all duration-300">{t('about.story.paragraph3')}</p>
 									</div>
 								</div>
@@ -175,15 +182,28 @@ const AboutUs = () => {
 						</div>
 					</div>
 
+					{/* Video con efectos mejorados */}
 					<div className="relative flex justify-center">
-						<div className="w-full max-w-md h-[568px] rounded-2xl overflow-hidden shadow-xl bg-gray-900">
-							<video className="w-full h-full object-cover" autoPlay loop muted playsInline>
-								<source
-									src="https://lafysstpyiejevhrlmzc.supabase.co/storage/v1/object/public/videos//Abouts_Us_Video.mp4"
-									type="video/mp4"
-								/>
-								Tu navegador no soporta el elemento de video.
-							</video>
+						{/* Resplandor de fondo sutil en azul */}
+						<div className="absolute inset-0 bg-blue-500/10 rounded-3xl blur-xl"></div>
+						
+						{/* Contenedor del video */}
+						<div className="relative w-full max-w-md">
+							<div className="relative group">
+								{/* Borde decorativo animado en azul */}
+								<div className="absolute -inset-1 bg-blue-600 dark:bg-blue-500 rounded-3xl blur opacity-50 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+								
+								{/* Video */}
+								<div className="relative h-[568px] rounded-2xl overflow-hidden shadow-2xl bg-gray-900 ring-1 ring-gray-900/5">
+									<video className="w-full h-full object-cover" autoPlay loop muted playsInline>
+										<source
+											src="https://lafysstpyiejevhrlmzc.supabase.co/storage/v1/object/public/videos//Abouts_Us_Video.mp4"
+											type="video/mp4"
+										/>
+										Tu navegador no soporta el elemento de video.
+									</video>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

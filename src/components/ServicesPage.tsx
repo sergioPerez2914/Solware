@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle, ChevronLeft, ChevronRight } from 'lucide-react'
+import { CheckCircle, ChevronLeft, ChevronRight, Home } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Particles from './Particles'
@@ -69,26 +69,6 @@ const ServicesPage: React.FC = () => {
         {
           title: t('services.desarrollo.details.2.title'),
           description: t('services.desarrollo.details.2.description'),
-        }
-      ]
-    },
-    {
-      id: 'crm',
-      title: t('services.crm.title'),
-      subtitle: t('services.crm.description'),
-      image: 'https://lafysstpyiejevhrlmzc.supabase.co/storage/v1/object/public/imagenes/Servicios/crm.webp',
-      points: [
-        {
-          title: t('services.crm.details.0.title'),
-          description: t('services.crm.details.0.description'),
-        },
-        {
-          title: t('services.crm.details.1.title'),
-          description: t('services.crm.details.1.description'),
-        },
-        {
-          title: t('services.crm.details.2.title'),
-          description: t('services.crm.details.2.description'),
         }
       ]
     },
@@ -365,11 +345,6 @@ const ServicesPage: React.FC = () => {
         'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&h=300&fit=crop&crop=center', // Coding screen
         'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop&crop=center', // Web development
         'https://images.unsplash.com/photo-1547658719-da2b51169166?w=500&h=300&fit=crop&crop=center'  // Mobile app
-      ],
-      crm: [
-        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop&crop=center', // Business analytics
-        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop&crop=center', // Dashboard
-        'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=500&h=300&fit=crop&crop=center'  // Data visualization
       ],
       digitalizacion: [
         'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=500&h=300&fit=crop&crop=center', // UI design mockup
@@ -667,18 +642,9 @@ const ServicesPage: React.FC = () => {
       {/* Call to Action - Fixed at bottom */}
       <div className="fixed bottom-0 left-0 right-0 z-10 bg-gray-50/95 dark:bg-gray-800/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-700">
         <div className="max-w-4xl lg:max-w-5xl xl:max-w-5xl 2xl:max-w-7xl mx-auto text-center px-4 sm:px-6 md:px-8 lg:px-10 xl:px-10 py-2 md:py-2.5 lg:py-2.5 xl:py-3 2xl:py-3.5">
-          <div className="flex flex-col sm:flex-row gap-2 md:gap-3 lg:gap-3 xl:gap-4 justify-center items-center">
-            <a
-              href="https://calendar.app.google/EYruMbWpJwJ82gHr6"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 2xl:px-12 py-1.5 sm:py-2 md:py-2 lg:py-2 xl:py-2.5 2xl:py-3 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
-            >
-              {t('services.requestConsultation')}
-            </a>
-            
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 lg:gap-8 xl:gap-10 justify-center items-center">
             {/* Navigation Button */}
-            <div className="inline-flex items-center px-3 sm:px-4 md:px-6 lg:px-6 xl:px-8 2xl:px-10 py-1 sm:py-1.5 md:py-2 lg:py-2 xl:py-2.5 2xl:py-2.5 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-full border border-gray-300 dark:border-gray-600">
+            <div className="inline-flex items-center px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 2xl:px-12 py-1.5 sm:py-2 md:py-2 lg:py-2 xl:py-2.5 2xl:py-3 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-full border border-gray-300 dark:border-gray-600">
               <span className="hidden md:inline">{t('services.navigation.slides.desktop')}</span>
               <span className="md:hidden">{t('services.navigation.slides.mobile')}</span>
             </div>
@@ -688,9 +654,10 @@ const ServicesPage: React.FC = () => {
               onClick={() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="inline-flex items-center px-3 sm:px-4 md:px-6 lg:px-6 xl:px-8 2xl:px-10 py-1 sm:py-1.5 md:py-2 lg:py-2 xl:py-2.5 2xl:py-2.5 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl font-medium text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 rounded-full hover:bg-blue-600 dark:hover:bg-blue-400 hover:text-white dark:hover:text-gray-900 transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 md:px-6 lg:px-6 xl:px-7 2xl:px-8 py-1.5 sm:py-2 md:py-2 lg:py-2 xl:py-2.5 2xl:py-3 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg 2xl:text-xl font-medium text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 rounded-full hover:bg-blue-600 dark:hover:bg-blue-400 hover:text-white dark:hover:text-gray-900 transition-all duration-300 hover:scale-105"
             >
-              {t('services.backToServices')}
+              <Home className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span>Inicio</span>
             </Link>
           </div>
         </div>

@@ -100,7 +100,12 @@ export default function Hero() {
 
 						{/* Responsive feature module - Only visible on smaller screens */}
 						<div className="lg:hidden mb-8 animate-fade-in-delay">
-							<div className="bg-white/10 dark:bg-blue-900/20 backdrop-blur-lg rounded-xl p-4 shadow-lg dark:shadow-blue-500/20">
+							<div className={`bg-white/10 dark:bg-blue-900/20 backdrop-blur-lg rounded-xl p-4 shadow-lg dark:shadow-blue-500/20 transition-all duration-500 ${
+								!isManualHover && autoHoverIndex === 0 ? '!shadow-[0_0_30px_rgba(245,158,11,0.6)]' :
+								!isManualHover && autoHoverIndex === 1 ? '!shadow-[0_0_30px_rgba(59,130,246,0.6)]' :
+								!isManualHover && autoHoverIndex === 2 ? '!shadow-[0_0_30px_rgba(168,85,247,0.6)]' :
+								!isManualHover && autoHoverIndex === 3 ? '!shadow-[0_0_30px_rgba(34,197,94,0.6)]' : ''
+							}`}>
 								<div className="grid grid-cols-2 gap-3">
 									{[
 										{
@@ -123,24 +128,59 @@ export default function Hero() {
 											title: t('hero.scalability'),
 											label: t('hero.limits'),
 										},
-									].map((stat, index) => (
-										<div
-											key={index}
-											className="text-center p-3 rounded-lg bg-white/5 dark:bg-blue-900/30 transition-all duration-300"
-										>
-											<div className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 dark:bg-blue-800/50 mb-2">
-												{React.cloneElement(stat.icon, {
-													className: 'h-5 w-5 text-white',
-												})}
+									].map((stat, index) => {
+										const isActiveHover = isManualHover 
+											? manualHoverIndex === index 
+											: autoHoverIndex === index
+
+										return (
+											<div
+												key={index}
+												onTouchStart={() => handleMouseEnter(index)}
+												onTouchEnd={handleMouseLeave}
+												className={`text-center p-3 rounded-lg bg-white/5 dark:bg-blue-900/30 transition-all duration-300 ${
+													isActiveHover ? 
+														`bg-white/20 dark:bg-blue-700/60 -translate-y-1 shadow-lg scale-105 ${
+															index === 0 ? 'shadow-amber-400/40' : 
+															index === 1 ? 'shadow-blue-400/40' : 
+															index === 2 ? 'shadow-purple-400/40' : 
+															index === 3 ? 'shadow-green-400/40' : ''
+														}` : ''
+												}`}
+											>
+												<div className={`inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 dark:bg-blue-800/50 mb-2 transition-all duration-300 ${
+													isActiveHover ? 
+														`scale-110 ${
+															index === 0 ? 'shadow-[0_0_15px_rgba(245,158,11,0.8)]' : 
+															index === 1 ? 'shadow-[0_0_15px_rgba(59,130,246,0.8)]' : 
+															index === 2 ? 'shadow-[0_0_15px_rgba(168,85,247,0.8)]' : 
+															index === 3 ? 'shadow-[0_0_15px_rgba(34,197,94,0.8)]' : ''
+														}` : ''
+												}`}>
+													{React.cloneElement(stat.icon, {
+														className: `h-5 w-5 transition-colors duration-300 ${
+															isActiveHover ? 
+																(index === 0 ? 'text-yellow-300' : 
+																 index === 1 ? 'text-blue-300' : 
+																 index === 2 ? 'text-purple-300' : 
+																 index === 3 ? 'text-green-300' : 'text-white') : 
+																'text-white'
+														}`,
+													})}
+												</div>
+												<h3 className={`text-sm font-medium text-white dark:text-blue-100 mb-1 transition-all duration-300 ${
+													isActiveHover ? 'font-semibold' : ''
+												}`}>
+													{stat.title}
+												</h3>
+												<p className={`text-xs text-white/80 dark:text-blue-200/80 transition-all duration-300 ${
+													isActiveHover ? 'text-white font-medium' : ''
+												}`}>
+													{stat.label}
+												</p>
 											</div>
-											<h3 className="text-sm font-medium text-white dark:text-blue-100 mb-1">
-												{stat.title}
-											</h3>
-											<p className="text-xs text-white/80 dark:text-blue-200/80">
-												{stat.label}
-											</p>
-										</div>
-									))}
+										)
+									})}
 								</div>
 							</div>
 						</div>

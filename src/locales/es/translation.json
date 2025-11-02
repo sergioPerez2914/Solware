@@ -21,7 +21,7 @@
 
     "title": "Transformación Digital para tu Empresa",
     "subtitle": "Automatizamos tus procesos empresariales y potenciamos tu negocio con el uso de Inteligencia Artificial, y con soluciones tecnológicas innovadoras.",
-    "demo": "Ver demostración",
+    "demo": "Casos Reales",
 
     "automation": "Automatización",
     "efficiency": "Más eficiencia",
@@ -171,7 +171,7 @@
           "description": "Diseñamos y configuramos flujos de trabajo que automatizan tareas repetitivas."
         },
         "1": {
-          "title": "Reducción de Errores",
+          "title": "Operaciones Precisas",
           "description": "Minimizamos errores humanos automatizando procesos críticos."
         },
         "2": {
@@ -203,7 +203,7 @@
       "description": "Creamos aplicaciones modernas y responsivas adaptadas a tu negocio.",
       "details": {
         "0": {
-          "title": "Diseño UX/UI Intuitivo",
+          "title": "Asesores UX/UI",
           "description": "Diseñamos interfaces atractivas y fáciles de usar que mejoran la experiencia del usuario."
         },
         "1": {

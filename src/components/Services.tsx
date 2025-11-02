@@ -1,4 +1,4 @@
-import { Settings, Code2, Users, Bot, BarChart2, Cuboid as Cube, ArrowRight } from 'lucide-react';
+import { Settings, Users, Bot, BarChart2, Cuboid as Cube, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ServiceCard from './ServiceCard';
 import BlurText from './effectsComponents/BlurText'
@@ -49,7 +49,14 @@ const Services = () => {
       ],
     },
     {
-      icon: <Code2 className="h-6 w-6 text-white" />,
+      icon: <svg 
+        className="h-6 w-6 text-white"
+        viewBox="0 0 500 500"
+        fill="currentColor"
+      >
+        <path d="M88.26,341.01h-3.59c-15.43,0-27.94,12.51-27.94,27.94v77.04h80.64c15.43,0,27.94-12.51,27.94-27.94h0c0-42.37-34.67-77.04-77.04-77.04Z"/>
+        <path d="M165.3,162.58h93.26v1.6c0,42.71,34.73,77.44,77.04,77.44h6.08c3.91-77.09,43.05-144.85,101.61-187.62H133.76c-42.31,0-77.04,34.33-77.04,77.04v31.54c0,229.93,247.9,134.53,247.9,255.88v27.54h108.58v-27.54c0-208.38-247.9-124.55-247.9-255.88Z"/>
+      </svg>,
       title: t('services.desarrollo.title'),
       description: t('services.desarrollo.description'),
       image: 'https://lafysstpyiejevhrlmzc.supabase.co/storage/v1/object/public/imagenes/Servicios/desarrollo.webp',

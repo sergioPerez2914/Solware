@@ -20,7 +20,7 @@
   "hero": {
     "title": "Digital Transformation for Your Business",
     "subtitle": "We automate your business processes and enhance your business with the use of Artificial Intelligence, and with innovative technological solutions.",
-    "demo": "Demo",
+    "demo": "Real Cases",
     "automation": "Automation",
     "efficiency": "More efficiency",
     "security": "Hyperpersonalization",
@@ -156,7 +156,7 @@
           "description": "We design and configure workflows that automate repetitive tasks."
         },
         "1": {
-          "title": "Error Reduction",
+          "title": "Precise Operations",
           "description": "We minimize human error by automating critical processes."
         },
         "2": {
@@ -188,7 +188,7 @@
       "description": "We create modern, responsive applications tailored to your business.",
       "details": {
         "0": {
-          "title": "Intuitive UX/UI Design",
+          "title": "UX/UI Advisors",
           "description": "We design attractive and user-friendly interfaces that enhance user experience."
         },
         "1": {
