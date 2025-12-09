@@ -3,8 +3,6 @@ import { Mail, Phone, Send, ChevronDown, Instagram, CheckCircle, AlertCircle } f
 import { supabase } from '../lib/supabase'
 import BlurText from './effectsComponents/BlurText'
 import { useTranslation } from 'react-i18next'
-import emailjs from '@emailjs/browser'
-import { emailjsConfig, isEmailJSConfigured } from '../lib/emailjs-config'
 
 interface FormData {
 	name: string
@@ -340,41 +338,31 @@ const Contact: React.FC = () => {
 			setSubmitStatus('idle')
 
 			try {
-				// Check if EmailJS is configured
-				const emailJSReady = isEmailJSConfigured()
-
-				let emailSent = false
-
-				if (emailJSReady) {
-					try {
-						// Prepare template parameters for EmailJS
-						const templateParams = {
-							to_email: emailjsConfig.toEmail,
-							from_name: formData.name,
-							from_email: formData.email,
-							phone: `${formData.countryCode} ${formData.phone}`,
-							areas: formData.areas.map((id) => areasDeInteres.find((area) => area.id === id)?.label || id).join(', '),
-							message: formData.message,
-							reply_to: formData.email,
-						}
-
-						// Send email using EmailJS
-						await emailjs.send(
-							emailjsConfig.serviceId,
-							emailjsConfig.templateId,
-							templateParams,
-							emailjsConfig.publicKey
-						)
-
-						emailSent = true
-					} catch (emailError) {
-						// Continue to save in database even if email fails
-					}
-				} else {
-					// EmailJS not configured, continue with database storage only
+				// Preparar los datos para el email
+				const emailData = {
+					name: formData.name,
+					email: formData.email,
+					phone: `${formData.countryCode} ${formData.phone}`,
+					areas: formData.areas.map((id) => areasDeInteres.find((area) => area.id === id)?.label || id).join(', '),
+					message: formData.message,
 				}
 
-				// Save to Supabase (always try this as backup)
+				// Enviar con Resend (función serverless)
+				const response = await fetch('/api/send', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(emailData),
+				})
+
+				const result = await response.json()
+
+				if (!response.ok) {
+					throw new Error(result.error || 'Error al enviar el email')
+				}
+
+				// Guardar en Supabase como backup
 				try {
 					const { error } = await supabase.from('contact_submissions').insert([
 						{
@@ -387,21 +375,14 @@ const Contact: React.FC = () => {
 					])
 
 					if (error) {
-						throw error
+						console.error('Error al guardar en base de datos:', error)
 					}
 				} catch (dbError) {
-					// If email wasn't sent and database fails, throw error
-					if (!emailSent) {
-						throw dbError
-					}
+					console.error('Error al guardar en base de datos:', dbError)
 				}
 
 				setSubmitStatus('success')
-				if (emailSent) {
-					setSubmitMessage('¡Mensaje enviado exitosamente! Te contactaremos pronto.')
-				} else {
-					setSubmitMessage('¡Mensaje recibido! Te contactaremos pronto. (Email pendiente de configuración)')
-				}
+				setSubmitMessage('¡Mensaje enviado exitosamente! Te contactaremos pronto.')
 
 				// Reset form
 				setFormData({

@@ -1,0 +1,6 @@
+# Archivos que no se deben subir a Vercel
+node_modules
+.git
+.env.local
+*.log
+.DS_Store

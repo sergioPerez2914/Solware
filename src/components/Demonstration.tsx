@@ -79,28 +79,25 @@ const Demonstration = () => {
 
 					{/* Video Section - Derecha */}
 					<div ref={videoRef} className="relative flex items-center justify-center">
-						{/* Resplandor de fondo sutil en azul */}
-						<div className="absolute inset-0 bg-blue-500/10 rounded-3xl blur-xl"></div>
-						
 						{/* Contenedor del video para formato vertical */}
 						<div className="relative w-full max-w-md h-full flex items-center">
-							<div className="relative group">
+							<div className="relative group w-full">
 								{/* Borde decorativo animado en azul */}
 								<div className="absolute -inset-1 bg-blue-600 dark:bg-blue-500 rounded-3xl blur opacity-50 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
 								
-							{/* Video con aspect ratio vertical */}
-							<div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gray-900 ring-1 ring-gray-900/5 w-full">
-								<video
-									src="https://lafysstpyiejevhrlmzc.supabase.co/storage/v1/object/public/videos/SolHoub/Conspat%20x%20Solware%20(1)%20(1).mp4"
-									className="w-full h-auto max-h-[500px] object-contain"
-									controls
-									preload="metadata"
-									playsInline
-									controlsList="nodownload"
-								>
-									Tu navegador no soporta el elemento de video.
-								</video>
-							</div>
+								{/* Video con aspect ratio vertical */}
+								<div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-gray-900/5">
+									<video
+										src="https://lafysstpyiejevhrlmzc.supabase.co/storage/v1/object/public/videos/SolHoub/Conspat%20x%20Solware%20(1)%20(1).mp4"
+										className="w-full h-auto max-h-[500px] object-cover"
+										controls
+										preload="metadata"
+										playsInline
+										controlsList="nodownload"
+									>
+										Tu navegador no soporta el elemento de video.
+									</video>
+								</div>
 							</div>
 						</div>
 					</div>
