@@ -71,7 +71,7 @@ const PreloaderBinary = memo(() => {
         }
         .binary-particle {
           position: absolute;
-          font-family: 'Courier New', monospace;
+          font-family: 'Ubuntu', sans-serif;
           font-weight: bold;
           pointer-events: none;
           animation: binaryFall linear infinite;

@@ -297,12 +297,92 @@ const ServicesPage: React.FC = () => {
       // El swipe vertical ahora se permite para scroll normal del contenido
     }
 
+    // Variables para manejar mouse drag (click del trackpad)
+    let mouseDownX = 0
+    let mouseDownY = 0
+    let isDragging = false
+    let mouseDownTime = 0
+
+    const handleMouseDown = (e: MouseEvent) => {
+      // Solo iniciar drag si es clic izquierdo
+      if (e.button !== 0) return
+      mouseDownX = e.clientX
+      mouseDownY = e.clientY
+      mouseDownTime = Date.now()
+      isDragging = false
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (mouseDownX === 0 && mouseDownY === 0) return
+      
+      const deltaX = e.clientX - mouseDownX
+      const deltaY = e.clientY - mouseDownY
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
+      
+      // Si el movimiento es principalmente horizontal y suficiente, considerar como drag
+      if (distance > 10 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+        isDragging = true
+      }
+    }
+
+    const handleMouseUp = (e: MouseEvent) => {
+      if (mouseDownX === 0 && mouseDownY === 0) return
+      
+      const deltaX = e.clientX - mouseDownX
+      const deltaY = e.clientY - mouseDownY
+      const deltaTime = Date.now() - mouseDownTime
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
+      
+      // Si fue un drag horizontal (arrastre)
+      if (isDragging && distance > 50 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5 && deltaTime < 500) {
+        if (deltaX > 0) {
+          // Drag hacia la derecha - ir al slide anterior
+          navigateToPrev()
+        } else {
+          // Drag hacia la izquierda - ir al siguiente slide
+          navigateToNext()
+        }
+      } 
+      // Si fue un clic simple (sin arrastre significativo)
+      else if (!isDragging && distance < 10 && deltaTime < 300) {
+        // Verificar que no se haya hecho clic en un elemento interactivo
+        const target = e.target as HTMLElement
+        const isInteractiveElement = target.closest('a, button, input, select, textarea, [role="button"]')
+        
+        if (!isInteractiveElement) {
+          const windowWidth = window.innerWidth
+          const clickX = e.clientX
+          const leftZone = windowWidth * 0.25  // 25% izquierdo
+          const rightZone = windowWidth * 0.75 // 75% (25% derecho)
+          
+          // Clic en el lado izquierdo → slide anterior
+          if (clickX < leftZone) {
+            navigateToPrev()
+          }
+          // Clic en el lado derecho → slide siguiente
+          else if (clickX > rightZone) {
+            navigateToNext()
+          }
+        }
+      }
+      
+      // Resetear variables
+      mouseDownX = 0
+      mouseDownY = 0
+      isDragging = false
+      mouseDownTime = 0
+    }
+
     // Solo aplicar en el área de contenido principal
     const mainContent = document.getElementById('main-content')
     if (mainContent) {
       mainContent.addEventListener('wheel', handleWheel, { passive: false })
       mainContent.addEventListener('touchstart', handleTouchStart, { passive: true })
       mainContent.addEventListener('touchend', handleTouchEnd, { passive: true })
+      mainContent.addEventListener('mousedown', handleMouseDown)
+      mainContent.addEventListener('mousemove', handleMouseMove)
+      mainContent.addEventListener('mouseup', handleMouseUp)
+      mainContent.addEventListener('mouseleave', handleMouseUp) // Resetear si el mouse sale del área
     }
     
     document.addEventListener('keydown', handleKeyDown)
@@ -312,6 +392,10 @@ const ServicesPage: React.FC = () => {
         mainContent.removeEventListener('wheel', handleWheel)
         mainContent.removeEventListener('touchstart', handleTouchStart)
         mainContent.removeEventListener('touchend', handleTouchEnd)
+        mainContent.removeEventListener('mousedown', handleMouseDown)
+        mainContent.removeEventListener('mousemove', handleMouseMove)
+        mainContent.removeEventListener('mouseup', handleMouseUp)
+        mainContent.removeEventListener('mouseleave', handleMouseUp)
       }
       document.removeEventListener('keydown', handleKeyDown)
     }
@@ -591,7 +675,7 @@ const ServicesPage: React.FC = () => {
       </main>
 
       {/* Call to Action - Fixed at bottom */}
-      <div className="fixed bottom-0 left-0 right-0 z-10 bg-gray-50/95 dark:bg-gray-800/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-700">
+      <div className="fixed bottom-0 left-0 right-0 z-10 bg-gray-50/95 dark:bg-gray-800/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 opacity-0 pointer-events-none">
         <div className="max-w-4xl lg:max-w-5xl xl:max-w-5xl 2xl:max-w-7xl mx-auto text-center px-4 sm:px-6 md:px-8 lg:px-10 xl:px-10 py-2 md:py-2.5 lg:py-2.5 xl:py-3 2xl:py-3.5">
           <div className="flex flex-col sm:flex-row gap-4 md:gap-6 lg:gap-8 xl:gap-10 justify-center items-center">
             {/* Navigation Button */}

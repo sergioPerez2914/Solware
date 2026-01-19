@@ -7,6 +7,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Ubuntu', 'sans-serif'],
+      },
       transitionDuration: {
         '600': '600ms',
       },

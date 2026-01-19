@@ -12,6 +12,7 @@ import Preloader from './components/Preloader'
 import ButtonMessageBot from './components/ButtonMessageBot'
 import AboutUs from './components/AboutUs'
 import Pricing from './components/Pricing'
+import CTA from './components/CTA'
 import SplashCursor from './components/effectsComponents/SplashCursor'
 import { Analytics } from '@vercel/analytics/react'
 
@@ -97,8 +98,22 @@ function App() {
 					<Hero />
 					<AboutUs />
 					<WorkProcess />
+					<CTA
+						variant="primary"
+						titleKey="cta1.title"
+						descriptionKey="cta1.description"
+						buttonTextKey="cta1.button"
+						buttonLink="#servicios"
+					/>
 					<Services />
 					<Automation />
+					<CTA
+						variant="secondary"
+						titleKey="cta2.title"
+						descriptionKey="cta2.description"
+						buttonTextKey="cta2.button"
+						buttonLink="#contacto"
+					/>
 					<Pricing />
 					<ValuesMission />
 					<Contact />

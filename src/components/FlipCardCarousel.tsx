@@ -154,10 +154,6 @@ const FlipCardCarousel: React.FC = () => {
                 {/* Back of card */}
                 <div className="absolute w-full h-full backface-hidden rotate-x-180">
                   <div className="h-full bg-white rounded-2xl shadow-lg p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">
-                      Detalles del Servicio
-                    </h3>
-
                     <div className="space-y-4">
                       {card.details.map((detail, index) => (
                         <div key={index}>

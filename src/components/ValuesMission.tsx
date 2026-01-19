@@ -3,6 +3,47 @@ import { Lightbulb, Users, Target, Leaf, Handshake } from 'lucide-react'
 import BlurText from './effectsComponents/BlurText'
 import { useTranslation } from 'react-i18next'
 
+// Función helper para resaltar palabras clave en negrita
+const highlightKeywords = (text: string, keywords: string[]): JSX.Element[] => {
+	const parts: (string | JSX.Element)[] = []
+	let lastIndex = 0
+	let key = 0
+
+	// Crear un patrón regex que busca las palabras clave (case insensitive)
+	const pattern = new RegExp(`(${keywords.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'gi')
+	
+	// Encontrar todas las coincidencias
+	const matches = Array.from(text.matchAll(pattern))
+	
+	if (matches.length === 0) {
+		return [<span key={0}>{text}</span>]
+	}
+
+	matches.forEach((match) => {
+		const matchIndex = match.index!
+		const matchText = match[0]
+
+		// Agregar texto antes de la coincidencia
+		if (matchIndex > lastIndex) {
+			parts.push(text.substring(lastIndex, matchIndex))
+		}
+
+		// Agregar la palabra clave en negrita
+		parts.push(<strong key={key++} className="font-bold text-gray-900 dark:text-white">{matchText}</strong>)
+
+		lastIndex = matchIndex + matchText.length
+	})
+
+	// Agregar el texto restante
+	if (lastIndex < text.length) {
+		parts.push(text.substring(lastIndex))
+	}
+
+	return parts.map((part, index) => 
+		typeof part === 'string' ? <span key={index}>{part}</span> : part
+	)
+}
+
 const ValuesMission: React.FC = () => {
 	const { t } = useTranslation()
 	const values = [
@@ -74,12 +115,16 @@ const ValuesMission: React.FC = () => {
 							<div className="w-12 h-12 bg-pink-100 dark:bg-pink-900/30 rounded-lg flex items-center justify-center float-left mr-4 mb-2">
 								<Handshake className="h-6 w-6 text-pink-600 dark:text-pink-400" />
 							</div>
-							<p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">{t('valuesMission.paragraph1')}</p>
-							<div className="text-gray-700 dark:text-gray-300 leading-relaxed">
-								{t('valuesMission.paragraph2').split('\n').map((line, index) => (
-									<p key={index} className="mb-2 last:mb-0">{line}</p>
-								))}
-							</div>
+							<p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+								{highlightKeywords(t('valuesMission.paragraph1'), [
+									'transformamos', 'tecnología', 'motor de cambio', 'soluciones innovadoras', 'accesibles', 'sostenibles', 'adaptadas'
+								])}
+							</p>
+							<p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+								{highlightKeywords(t('valuesMission.paragraph2'), [
+									'confianza', 'colaboración', 'excelencia', 'superar expectativas', 'futuro digital', 'éxito', 'objetivo'
+								])}
+							</p>
 						</div>
 					</div>
 

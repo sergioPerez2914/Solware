@@ -3,6 +3,47 @@ import BlurText from './effectsComponents/BlurText'
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect } from 'react'
 
+// Función helper para resaltar palabras clave en negrita
+const highlightKeywords = (text: string, keywords: string[]): JSX.Element[] => {
+	const parts: (string | JSX.Element)[] = []
+	let lastIndex = 0
+	let key = 0
+
+	// Crear un patrón regex que busca las palabras clave (case insensitive)
+	const pattern = new RegExp(`(${keywords.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'gi')
+	
+	// Encontrar todas las coincidencias
+	const matches = Array.from(text.matchAll(pattern))
+	
+	if (matches.length === 0) {
+		return [<span key={0}>{text}</span>]
+	}
+
+	matches.forEach((match) => {
+		const matchIndex = match.index!
+		const matchText = match[0]
+
+		// Agregar texto antes de la coincidencia
+		if (matchIndex > lastIndex) {
+			parts.push(text.substring(lastIndex, matchIndex))
+		}
+
+		// Agregar la palabra clave en negrita
+		parts.push(<strong key={key++} className="font-bold text-gray-900 dark:text-white">{matchText}</strong>)
+
+		lastIndex = matchIndex + matchText.length
+	})
+
+	// Agregar el texto restante
+	if (lastIndex < text.length) {
+		parts.push(text.substring(lastIndex))
+	}
+
+	return parts.map((part, index) => 
+		typeof part === 'string' ? <span key={index}>{part}</span> : part
+	)
+}
+
 
 const AboutUs = () => {
 	const { t } = useTranslation()
@@ -115,7 +156,11 @@ const AboutUs = () => {
 									>
 										<p className="text-gray-700 dark:text-gray-300 text-sm md:text-base leading-relaxed
 											group-hover:text-gray-900 dark:group-hover:text-white
-											transition-all duration-300">{t('about.story.paragraph1')}</p>
+											transition-all duration-300">
+											{highlightKeywords(t('about.story.paragraph1'), [
+												'fórmulas', 'optimizando', 'organizando', 'datos', 'Excel'
+											])}
+										</p>
 									</div>
 								</div>
 								
@@ -145,7 +190,11 @@ const AboutUs = () => {
 									>
 										<p className="text-gray-700 dark:text-gray-300 text-sm md:text-base leading-relaxed
 											group-hover:text-gray-900 dark:group-hover:text-white
-											transition-all duration-300">{t('about.story.paragraph2')}</p>
+											transition-all duration-300">
+											{highlightKeywords(t('about.story.paragraph2'), [
+												'página web', 'automatizar', 'ahorrarle horas', 'web app', 'gestionaba'
+											])}
+										</p>
 									</div>
 								</div>
 								
@@ -175,7 +224,11 @@ const AboutUs = () => {
 									>
 										<p className="text-gray-700 dark:text-gray-300 text-sm md:text-base leading-relaxed
 											group-hover:text-gray-900 dark:group-hover:text-white
-											transition-all duration-300">{t('about.story.paragraph3')}</p>
+											transition-all duration-300">
+											{highlightKeywords(t('about.story.paragraph3'), [
+												'autodidactas', 'equipo de profesionales', 'enseñamos', 'compartimos', 'colaborativa'
+											])}
+										</p>
 									</div>
 								</div>
 							</div>
@@ -199,8 +252,11 @@ const AboutUs = () => {
 										src="https://lafysstpyiejevhrlmzc.supabase.co/storage/v1/object/public/videos/SolHoub/Conspat%20x%20Solware%20(1)%20(1).mp4"
 										className="w-full h-[568px] object-cover"
 										controls
-										preload="metadata"
+										autoPlay
+										loop
+										muted
 										playsInline
+										preload="auto"
 										controlsList="nodownload"
 									>
 										Tu navegador no soporta el elemento de video.
@@ -268,7 +324,9 @@ const AboutUs = () => {
 									</p>
 									
 									   <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-6">
-										{t('recognition.description')}
+										{highlightKeywords(t('recognition.description'), [
+											'innovación', 'salud digital', 'calidad', 'eficiencia', 'clínicas', 'laboratorios'
+										])}
 									</p>
 									
 									{/* Stats del logro */}

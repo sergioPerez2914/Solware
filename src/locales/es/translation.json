@@ -7,7 +7,7 @@
       "soluciones": "Servicios",
       "automatizacion": "Automatización",
       "masVendidos": "Más Vendidos",
-      "contacto": "Contacto"
+      "contacto": "Test"
     },
     "consulta": "Consulta Gratuita",
     "darkMode": "Modo Oscuro",
@@ -299,6 +299,16 @@
       "title": "Asistentes Virtuales",
       "description": "Implementación de chatbots y asistentes automatizados"
     }
+  },
+  "cta1": {
+    "title": "¿Tienes perdidas de tiempo en tareas repetitivas?",
+    "description": "Descubre nuestras soluciones personalizadas que impulsarán tu crecimiento digital",
+    "button": "Explorar Soluciones"
+  },
+  "cta2": {
+    "title": "¿Quieres saber que tipo de Solwy eres?",
+    "description": "Únete a la comunidad de Solwy para conocer tu personalidad y descubrir que tipo de asistente eres",
+    "button": "Ir al test"
   },
   "pricing": {
     "title": "Más Vendidos",

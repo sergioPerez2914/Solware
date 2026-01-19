@@ -217,10 +217,10 @@ const Carousel: React.FC<CarouselProps> = ({ items, autoPlay = true, autoPlayInt
 
 			<button
 				onClick={handlePrevious}
-				className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full
-          bg-white/90 dark:bg-gray-800/90 shadow-lg hover:bg-white dark:hover:bg-gray-700 
-          transition-all duration-275 ease-out hover:scale-105 hover:shadow-xl
-          transform active:scale-95"
+				className="absolute -left-3 md:-left-3 lg:-left-0 top-[calc(50%-40px)] -translate-y-1/2 z-20 p-2.5 rounded-full
+          	bg-white/90 dark:bg-gray-800/90 shadow-lg hover:bg-white dark:hover:bg-gray-700 
+          	transition-all duration-275 ease-out hover:scale-105 hover:shadow-xl
+          	transform active:scale-95"
 				aria-label="Anterior"
 			>
 				<ChevronLeft className="w-5 h-5 text-gray-800 dark:text-gray-200" />
@@ -228,7 +228,7 @@ const Carousel: React.FC<CarouselProps> = ({ items, autoPlay = true, autoPlayInt
 
 			<button
 				onClick={handleNext}
-				className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full
+				className="absolute -right-3 md:-right-3 lg:-right-0 top-[calc(50%-40px)] -translate-y-1/2 z-20 p-2.5 rounded-full
           bg-white/90 dark:bg-gray-800/90 shadow-lg hover:bg-white dark:hover:bg-gray-700 
           transition-all duration-275 ease-out hover:scale-105 hover:shadow-xl
           transform active:scale-95"

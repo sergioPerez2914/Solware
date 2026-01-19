@@ -58,41 +58,56 @@ const WhatsAppButton = memo(() => {
         /* DESKTOP STYLES (Por defecto - hacia la derecha) */
         .whatsapp-btn:hover ~ .instagram-btn,
         .matryoshka-group.auto-hover .instagram-btn,
-        .matryoshka-group:hover .instagram-btn {
+        .matryoshka-group:hover .instagram-btn,
+        .instagram-btn:hover ~ .linkedin-btn,
+        .instagram-btn:hover {
           animation: matryoshka-pop-ig 0.8s ease-out 0.1s forwards !important;
           pointer-events: auto;
         }
         .whatsapp-btn:hover ~ .linkedin-btn,
         .matryoshka-group.auto-hover .linkedin-btn,
-        .matryoshka-group:hover .linkedin-btn {
+        .matryoshka-group:hover .linkedin-btn,
+        .instagram-btn:hover ~ .linkedin-btn {
           animation: matryoshka-pop-ln 0.8s ease-out 0.2s forwards !important;
           pointer-events: auto;
         }
 
         .matryoshka-group:hover .instagram-btn,
-        .matryoshka-group.auto-hover .instagram-btn {
+        .matryoshka-group.auto-hover .instagram-btn,
+        .instagram-btn:hover {
           pointer-events: auto;
           opacity: 1;
         }
 
         .matryoshka-group:hover .linkedin-btn,
-        .matryoshka-group.auto-hover .linkedin-btn {
+        .matryoshka-group.auto-hover .linkedin-btn,
+        .instagram-btn:hover ~ .linkedin-btn,
+        .linkedin-btn:hover {
           pointer-events: auto;
           opacity: 1;
         }
 
         .instagram-btn:hover {
           transform: translateY(-50%) translateX(70px) scale(1.1) !important;
+          animation: none !important;
         }
 
         .linkedin-btn:hover {
           transform: translateY(-50%) translateX(120px) scale(1.1) !important;
+          animation: none !important;
         }
 
-        .matryoshka-group:not(:hover):not(.auto-hover):not(.auto-hover-exit) .instagram-btn {
+        /* Mantener ambos botones visibles cuando Instagram tiene hover */
+        .instagram-btn:hover ~ .linkedin-btn {
+          opacity: 1 !important;
+          animation: matryoshka-pop-ln 0.1s ease-out forwards !important;
+        }
+
+        /* Solo aplicar animaciones de salida cuando el grupo no tiene hover Y ningún botón tiene hover individual */
+        .matryoshka-group:not(:hover):not(.auto-hover):not(.auto-hover-exit) .instagram-btn:not(:hover) {
           animation: matryoshka-stay-ig 1.1s ease-out forwards, matryoshka-exit-ig 0.5s ease-in 1.1s forwards;
         }
-        .matryoshka-group:not(:hover):not(.auto-hover):not(.auto-hover-exit) .linkedin-btn {
+        .matryoshka-group:not(:hover):not(.auto-hover):not(.auto-hover-exit) .linkedin-btn:not(:hover):not(.instagram-btn:hover ~ *) {
           animation: matryoshka-stay-ln 1s ease-out forwards, matryoshka-exit-ln 0.5s ease-in 1s forwards;
         }
 
@@ -196,12 +211,15 @@ const WhatsAppButton = memo(() => {
             right: -5px !important;
             bottom: -5px !important;
             left: -5px !important;
+            pointer-events: auto !important;
           }
 
           /* Reemplazar animaciones desktop en móvil - Instagram arriba */
           .whatsapp-btn:hover ~ .instagram-btn,
           .matryoshka-group.auto-hover .instagram-btn,
-          .matryoshka-group:hover .instagram-btn {
+          .matryoshka-group:hover .instagram-btn,
+          .instagram-btn:hover ~ .linkedin-btn,
+          .instagram-btn:hover {
             animation: matryoshka-pop-ig-mobile 0.8s ease-out 0.1s forwards !important;
             pointer-events: auto;
           }
@@ -209,7 +227,8 @@ const WhatsAppButton = memo(() => {
           /* Reemplazar animaciones desktop en móvil - LinkedIn arriba */
           .whatsapp-btn:hover ~ .linkedin-btn,
           .matryoshka-group.auto-hover .linkedin-btn,
-          .matryoshka-group:hover .linkedin-btn {
+          .matryoshka-group:hover .linkedin-btn,
+          .instagram-btn:hover ~ .linkedin-btn {
             animation: matryoshka-pop-ln-mobile 0.8s ease-out 0.2s forwards !important;
             pointer-events: auto;
           }
@@ -217,17 +236,25 @@ const WhatsAppButton = memo(() => {
           /* Hover states para móvil */
           .instagram-btn:hover {
             transform: translateX(-50%) translateY(-70px) scale(1.1) !important;
+            animation: none !important;
           }
 
           .linkedin-btn:hover {
             transform: translateX(-50%) translateY(-110px) scale(1.1) !important;
+            animation: none !important;
+          }
+
+          /* Mantener ambos botones visibles cuando Instagram tiene hover en móvil */
+          .instagram-btn:hover ~ .linkedin-btn {
+            opacity: 1 !important;
+            animation: matryoshka-pop-ln-mobile 0.1s ease-out forwards !important;
           }
 
           /* Animaciones de permanencia para móvil */
-          .matryoshka-group:not(:hover):not(.auto-hover):not(.auto-hover-exit) .instagram-btn {
+          .matryoshka-group:not(:hover):not(.auto-hover):not(.auto-hover-exit) .instagram-btn:not(:hover) {
             animation: matryoshka-stay-ig-mobile 1.1s ease-out forwards, matryoshka-exit-ig-mobile 0.5s ease-in 1.1s forwards !important;
           }
-          .matryoshka-group:not(:hover):not(.auto-hover):not(.auto-hover-exit) .linkedin-btn {
+          .matryoshka-group:not(:hover):not(.auto-hover):not(.auto-hover-exit) .linkedin-btn:not(:hover):not(.instagram-btn:hover ~ *) {
             animation: matryoshka-stay-ln-mobile 1s ease-out forwards, matryoshka-exit-ln-mobile 0.5s ease-in 1s forwards !important;
           }
 
@@ -331,8 +358,8 @@ const WhatsAppButton = memo(() => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {/* Área invisible para mantener hover - ajustada según dispositivo */}
-        <div className="hover-area absolute -top-5 -bottom-5 -left-5 -right-32 pointer-events-none hover:pointer-events-auto"></div>
+        {/* Área invisible para mantener hover - expandida para incluir ambos botones */}
+        <div className="hover-area absolute -top-5 -bottom-5 -left-5 -right-[150px] md:-right-[150px] pointer-events-auto"></div>
         
         {/* Botón principal de WhatsApp */}
         <button

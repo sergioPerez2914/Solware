@@ -83,10 +83,6 @@ const ServiceCard = memo(
 					{/* Back of card */}
 					<div className="absolute w-full h-full backface-hidden rotate-y-180" onClick={() => setIsFlipped((f) => !f)}>
 						<div className="h-full w-full bg-blue-600 dark:bg-blue-600 rounded-2xl shadow-lg p-4 sm:p-6 flex flex-col">
-							<h3 className="text-base sm:text-lg font-bold text-white mb-4 sm:mb-6 transition-colors duration-300">
-								{t('services.details')}
-							</h3>
-
 							<div className="flex-grow space-y-3 sm:space-y-4 lg:space-y-6 overflow-y-auto scrollbar-hide">
 								{details.map((detail, index) => (
 									<div key={index} className="group">

@@ -7,7 +7,7 @@
       "soluciones": "Services",
       "automatizacion": "Automation",
       "masVendidos": "Best Sellers",
-      "contacto": "Contact"
+      "contacto": "Test"
     },
     "consulta": "Free Consultation",
     "darkMode": "Dark Mode",
@@ -283,6 +283,16 @@
       "title": "Virtual Assistants",
       "description": "Implementation of chatbots and automated assistants"
     }
+  },
+  "cta1": {
+    "title": "Do you have time losses in repetitive tasks?",
+    "description": "Discover our personalized solutions that will boost your digital growth",
+    "button": "Explore Solutions"
+  },
+  "cta2": {
+    "title": "Do you want to know what type of Solwy you are?",
+    "description": "Join the Solwy community to discover your personality and find out what type of assistant you are",
+    "button": "Go to test"
   },
   "pricing": {
     "title": "Best Sellers",
