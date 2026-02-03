@@ -8,8 +8,6 @@ on:
 
 jobs:
   call-workflow:
-    # La ruta se compone de: ORGANIZACION/REPOSITORIO/RUTA_AL_ARCHIVO@RAMA
     uses: Solware-Agency/git-actions/.github/workflows/discord-notifier.yml@main
-    secrets:
-      # Pasamos el secreto que creaste en la Org al nombre que espera el repo central
-      DISCORD_WEBHOOK_URL: ${{ secrets.GLOBAL_DISCORD_WEBHOOK }}
+    # SUSTITUYE "secrets: ..." por esto:
+    secrets: inherit
